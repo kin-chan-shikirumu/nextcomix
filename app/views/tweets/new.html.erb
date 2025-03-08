@@ -1,0 +1,44 @@
+<%= stylesheet_link_tag 'new', :media => "all" %>
+<h3>新規マンガ作品紹介ページ</h3>
+<%= form_for @tweet do |f| %>
+  <div class='form-group'>
+    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %> 
+      <div class='form-check'>
+        <%= tag.label class: 'form-check-label' do %>
+          <%= tag.check_box class: 'form-check-input' %>
+          <%= tag.text %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>  
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, :size=> 75 %><br>
+    <%= f.label :about %>
+    <%= f.text_area :about, :size=>"80x5" %><br>
+    <%= f.label :body %><br>
+    <%= f.text_area :body, :size=>"80x10" %><br>
+    <%= f.label :serialization %>
+    <%= f.text_field :serialization, :size => 75 %><br>
+    <%= f.label :circulationtotal %>
+    <%= f.text_field :circulationtotal, :size=> 75 %><br>
+    <%= f.label :circulation %>
+    <%= f.number_field :circulation, :size=> 50 %><br>
+    <%= f.label :circulationtotwothousand %>
+    <%= f.number_field :circulationtotwothousand, :size=> 25 %><br>
+    <%= f.label :circulationtotwentyten %>
+    <%= f.number_field :circulationtotwentyten, :size=> 25 %><br>
+    <%= f.label :circulationtotwentyfifteen %>
+    <%= f.number_field :circulationtotwentyfifteen, :size=> 25 %><br>
+    <%= f.label :circulationtotwentytwenty %>
+    <%= f.number_field :circulationtotwentytwenty, :size=> 25 %><br>
+    <%= f.label :circulationtotwentytwentyfive %>
+    <%= f.number_field :circulationtotwentytwentyfive, :size=> 25 %><br>
+    <%= f.label :award %>
+    <%= f.text_field :award, :size=> 75 %><br>
+    <%= f.label :app %>
+    <%= f.text_field :app, :size=> 75 %><br>
+  </div>
+  <%= f.submit "紹介" %>
+<% end %>
+<%= link_to "作品一覧に戻る", tweets_path %>

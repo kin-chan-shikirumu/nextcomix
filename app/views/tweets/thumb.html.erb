@@ -1,0 +1,83 @@
+<div class= "box">
+  <h3>年代別人気漫画ランキング(発行部数)</h3>
+  <%= link_to "～2000年", tweets_ranking2000_path %>
+  <%= link_to "2001年～2010年", tweets_ranking2010_path %>
+  <%= link_to "2011年～2015年", tweets_ranking2015_path %>
+  <%= link_to "2016年～2020年", tweets_ranking2020_path %>
+  <%= link_to "2021年～2025年", tweets_ranking2025_path %>
+  <h3>マンガ検索</h3>
+  ▼作品名から<%= form_tag({controller:"tweets",action:"thumb"}, method: :get) do %>
+    <%= text_field_tag :search %>
+    <%= submit_tag '検索' %>
+  <% end %>
+  ▼ジャンルから絞り込み
+  <%= form_tag({controller:"tweets",action:"thumb"}, method: :get) do %>
+      <% Tag.all.each do |t| %>
+          <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+      <% end %>
+      <%= submit_tag 'タグ検索' %>
+  <% end %>
+  <% if reader_signed_in? && current_reader.email == ENV['ADMIN_EMAIL'] %> 
+    <%= form_tag({controller:"tweets",action:"thumb"}, method: :get) do %>
+      <%= text_field_tag :tag %>
+      <%= submit_tag 'タグを追加' %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class= "main">
+  <h2>とっておきのマンガが見つかる！<br>
+  あなただけのマンガ検索サイト<br></h2>
+  <div class="introduction">
+    <h2>①細かくジャンル別で絞込検索<br></h2>
+      <div class="comic-image">
+        <%= image_tag 'ONE PIECE.jpg', :size => "250x125" %>
+      </div>
+    <p>「次読みたいマンガがみつからない！」人におすすめの機能。
+      様々なジャンルから今あなたが読みたいものをご提案します。
+    </p>
+    <h2>②年代別ランキングで人気マンガをチェック<br></h2>
+      <div class="comic-image">
+        <%= image_tag 'ONE PIECE.jpg', :size => "250x125" %>
+      </div>
+    <p>「今の流行りだけじゃなくて、ちょっと前の人気作も読んでみたい！」人におすすめの機能。
+    『スラムダンク』や『デスノート』など、懐かしの名作も年代ごとの発行部数からランキング化！</p>
+    <h2>③読者のナマの声が<br></h2>
+      <div class="comic-image">
+        <%= image_tag 'ONE PIECE.jpg', :size => "250x125" %>
+      </div>
+    <p>「じゃあ、実際どうなん？」と読むのをためらったそこのアナタ。読者コメントから
+    </p>
+    <h2>④どのアプリから読めるかも一目瞭然！<br></h2>
+  </div>
+  <h3>マンガ作品一覧</h3>
+  <div class="tweets-container">
+    <% @tweets.each do |t| %>
+      <div class="tweet">
+    <h2><%= link_to t.title, tweet_path(t.id) %></h2>
+    <image src="../../assets/images/ONE PIECE.jpg" class="comic-image">
+    <%= image_tag 'ONE PIECE.jpg', :size => "250x125" %>
+    <% if reader_signed_in? %>
+          <% if current_reader.already_liked?(t) %>
+            <%= button_to tweet_like_path(id: t.id, tweet_id: t.id), data: { turbo_method: :delete } do %>
+                <p>いいねを取り消す</p><%= t.likes.count %>
+            <% end %>
+          <% else %>
+            <%= button_to tweet_likes_path(id: t.id, tweet_id: t.id), data: { turbo_method: :post }  do %>
+              <p>いいね</p><%= t.likes.count %>
+            <% end %>
+          <% end %>
+    <% else %>
+        <p>いいねの数 = </p><%= t.likes.count %>
+    <% end %>
+      <% if reader_signed_in? && current_reader.email == ENV['ADMIN_EMAIL'] %> 
+        <%= link_to "編集", edit_tweet_path(t.id) %>
+        <%= button_to "削除", tweet_path(t.id), method: :delete %>
+      <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= stylesheet_link_tag "application", media: "all" %>
+<%= stylesheet_link_tag "thumb", media: "all" %>

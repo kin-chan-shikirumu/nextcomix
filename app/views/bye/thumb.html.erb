@@ -1,0 +1,7 @@
+<h1>neXt comiX</h1> 
+<h3>「つぎ何読もう？」お困りのあなたへ</h3><br>
+<h4>▶閲覧のみの方は</h4><%= link_to "マンガ紹介ページへ", tweets_path %><br>
+<h4>▶コメントをする方はログインをしてから</h4><br>
+STEP1 初めての方は<%= button_to "新規登録", new_reader_registration_path %>
+STEP2 登録済みの方は<%= button_to "ログイン", reader_session_path %>
+STEP3 ログインが終わったら<%= link_to "マンガ紹介ページへ", tweets_path %>

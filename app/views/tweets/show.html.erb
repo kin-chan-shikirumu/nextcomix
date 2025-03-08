@@ -1,0 +1,169 @@
+<h1><p><%= @tweet.title %></p> </h1>
+<%= link_to "作品一覧に戻る", tweets_thumb_path %>
+<div class="tweet">
+  <h4>ジャンル</h4>
+  <% @tweet.tags.each do |tag| %>
+    <span><%= tag.name %></span>
+  <% end %><br>
+  <h4>あらすじ</h4>
+  <p><%= @tweet.about %></p>
+  <h4>マンガの特徴</h4>
+  <p><%= @tweet.body %></p>
+  <h4>連載状況</h4>
+  <p><%= @tweet.serialization %></p>
+  <h4>累計発行部数</h4>
+  <p><%= @tweet.circulationtotal %></p>
+  <h4>受賞など</h4>
+  <p><%= @tweet.award %></p>
+  <h4>この作品を無料で読めるアプリ</h4>
+  <p><%= @tweet.app %></p>
+    <% if reader_signed_in? %>
+        <% if current_reader.already_liked?(@tweet) %>
+            <%= button_to tweet_like_path(id: @tweet.id, tweet_id: @tweet.id), data: { turbo_method: :delete } do %>
+                <p>いいねを取り消す</p><%= @tweet.likes.count %>
+            <% end %>
+        <% else %>
+            <%= button_to tweet_likes_path(id: @tweet.id, tweet_id: @tweet.id), data: { turbo_method: :post }  do %>
+                <p>いいね</p><%= @tweet.likes.count %>
+            <% end %>
+        <% end %>
+    <% else %>
+        <p>いいねの数 = </p><%= @tweet.likes.count %>
+    <% end %><br>
+  <% if reader_signed_in? && current_reader.email == ENV['ADMIN_EMAIL'] %> 
+    <%= link_to "編集する", edit_tweet_path(@tweet.id) %>
+  <% end %>
+</div>
+
+<h3>いいねした読者</h3>
+<% @tweet.liked_readers.each do |reader| %>
+  <li><%= reader.email %></li>
+<% end %>
+
+<div class="comment-wrapper">
+  <h3><p>読者の「ナマの声」</p></h3>
+  <% @comments.each do |c| %>
+    <div class="comment">
+      <div class="left-container">
+        <%= c.reader.email unless c.reader.blank? %><br>
+        <%= c.content %>
+      </div>
+      <div id="comment-<%= c.id %>-rating"></div>
+      <div class="right-container">
+        <p><%= c.created_at %></p>
+      </div>
+    </div>
+      <br>
+  <% end %>
+
+  <% if reader_signed_in? %>
+    <div id="rating-form">
+      <%= form_with(model: [@tweet, @comment], local: true, id: "commentform") do |f| %>
+      <p>評価</p>
+        <%= f.hidden_field :rate, value: 0, id: "comment_rate" %>
+        <p>好きな巻数を投票</p>
+        <div id="volume-buttons">
+          <% (1..12).each do |volume| %>
+            <button type="button" class="vote-button" data-volume="<%= volume %>">
+              <%= volume %>巻
+            </button>
+          <% end %>
+        </div>
+        <%= f.hidden_field :vote_volume, id: "selectedVolume" %>
+        <%= f.label :content, "コメント" %>
+        <%= f.text_area :content, :size => "80x5" %>
+        <p>※誹謗中傷などは削除される可能性がございます。</p>
+        <%= button_tag type: "submit" do %>
+          <i class="far fa-comments"></i> コメント投稿
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<!-- グラフ表示用のキャンバス -->
+<canvas id="voteChart"></canvas>
+
+<!-- Chart.js の読み込み -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  // 投票ボタン -> hidden_field に値を入れる
+  document.addEventListener("DOMContentLoaded", function() {
+    const buttons = document.querySelectorAll(".vote-button");
+    const hiddenInput = document.getElementById("selectedVolume");
+
+    buttons.forEach(button => {
+      button.addEventListener("click", function() {
+        buttons.forEach(btn => btn.classList.remove("selected"));
+        this.classList.add("selected");
+        hiddenInput.value = this.dataset.volume;
+      });
+    });
+  });
+
+  // グラフ描画用のコード
+  document.addEventListener("DOMContentLoaded", function() {
+    // コントローラで作成した集計結果を JS のオブジェクトに変換
+    var voteData = <%= raw @vote_results.to_json %>;
+    
+    var ctx = document.getElementById('voteChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: Object.keys(voteData).map(v => v + "巻"),
+        datasets: [{
+          label: '投票数',
+          data: Object.values(voteData),
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOMContentLoaded イベント発火");
+
+    const ratingForm = document.getElementById("rating-form");
+    if (ratingForm && !ratingForm.dataset.ratyInitialized) {
+      console.log("ratingForm に Raty を適用");
+      new Raty(ratingForm, {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        scoreName: "comment[rate]"
+      });
+      ratingForm.dataset.ratyInitialized = "true";
+    }
+
+    const comments = <%= raw(@comments.map { |c| { id: c.id, rate: c.rate || 0 } }.to_json) %>;
+    comments.forEach(comment => {
+      const commentRatingElement = document.getElementById(`comment-${comment.id}-rating`);
+      if (commentRatingElement && !commentRatingElement.dataset.ratyInitialized) {
+        console.log(`comment-${comment.id}-rating に Raty を適用`);
+        new Raty(commentRatingElement, {
+          starOn: "<%= asset_path('star-on.png') %>",
+          starOff: "<%= asset_path('star-off.png') %>",
+          starHalf: "<%= asset_path('star-half.png') %>",
+          readOnly: true,
+          score: comment.rate
+        });
+        commentRatingElement.dataset.ratyInitialized = "true";
+      }
+    });
+  });
+</script>
+
+<%= link_to "作品一覧に戻る", tweets_thumb_path %>
+
+<%= stylesheet_link_tag "application", media: "all" %>
+<%= stylesheet_link_tag "show", media: "all" %>

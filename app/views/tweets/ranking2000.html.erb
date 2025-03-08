@@ -1,0 +1,7 @@
+<h2>2000年以前の発行部数ランキング</h2><ol>
+  <% @ranking_tweets.each do |tweet| %>
+    <li>
+      <%= link_to tweet.title, tweet_path(tweet) %> - <%= tweet.circulationtotwothousand %> 部
+    </li>
+  <% end %>
+</ol>
