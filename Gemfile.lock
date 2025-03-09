@@ -324,6 +324,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   brakeman
+  bundler
   capybara
   chartkick
   debug

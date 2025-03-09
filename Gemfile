@@ -70,6 +70,8 @@ gem "dotenv-rails"
 
 gem "chartkick"
 
+gem 'bundler'
+
 group :production do
   gem "pg"
 end
