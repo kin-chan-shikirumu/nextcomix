@@ -8,17 +8,22 @@ class CommentsController < ApplicationController
   
     if @comment.save
       respond_to do |format|
-        format.json { render json: { success: true, comment: @comment } }
-      flash[:success] = "コメントしました"
-      redirect_back(fallback_location: root_path)
-      end
-    else
-      respond_to do |format|
-        format.json { render json: { success: false, errors: @comment.errors.full_messages }, status: :unprocessable_entity }
-      flash[:success] = "コメントできませんでした"
-      redirect_back(fallback_location: root_path)
+        if @comment.save
+          format.html { redirect_to @comment.tweet, notice: 'Comment was successfully created.' }
+          format.json { render json: { success: true, comment: @comment } }
+        else
+          format.html { render :new }
+          format.json { render json: { success: false, errors: @comment.errors.full_messages }, status: :unprocessable_entity }
+        end
       end
     end
+  end
+
+  def destroy
+    @comment = Comment.find_by(id: params[:id], tweet_id: params[:tweet_id])
+    @comment.destroy
+    flash[:success] = "コメントを削除しました"
+    redirect_to tweets_path
   end
 
   private

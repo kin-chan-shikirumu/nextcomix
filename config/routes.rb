@@ -13,12 +13,17 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
+  post 'tweets/:tweet_id/likes' => 'likes#create'
+  post 'tweets/:tweet_id/likes/:id' => 'likes#destroy'
+
   get 'bye/thumb' => 'bye#thumb'
   get 'bye/pink' => 'bye#pink'
 
-  root 'tweets#thumb'
+  root 'tweets#home'
+  get 'tweets/home' => 'tweets#home'
   get 'tweets' => 'tweets#thumb'
   get 'tweets/thumb' => 'tweets#thumb'
+  get 'tweets/rankingtotal', to:'tweets#rankingtotal'
   get 'tweets/ranking2000', to:'tweets#ranking2000'
   get 'tweets/ranking2010', to:'tweets#ranking2010'
   get 'tweets/ranking2015', to:'tweets#ranking2015'
@@ -26,6 +31,6 @@ Rails.application.routes.draw do
   get 'tweets/ranking2025', to:'tweets#ranking2025'
   resources :tweets do
     resources :likes, only: [:create, :destroy]
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :destroy]
   end
 end

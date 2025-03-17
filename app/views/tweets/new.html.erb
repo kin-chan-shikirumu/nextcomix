@@ -14,12 +14,18 @@
   <div class="field">
     <%= f.label :title %>
     <%= f.text_field :title, :size=> 75 %><br>
+    <%= f.label :image %>
+    <%= f.file_field :image %><br>
     <%= f.label :about %>
     <%= f.text_area :about, :size=>"80x5" %><br>
     <%= f.label :body %><br>
     <%= f.text_area :body, :size=>"80x10" %><br>
+    <%= f.label :author %>
+    <%= f.text_field :author, :size=> 25 %><br>
     <%= f.label :serialization %>
     <%= f.text_field :serialization, :size => 75 %><br>
+    <%= f.label :volume %>
+    <%= f.number_field :volume, :size => 25 %><br>
     <%= f.label :circulationtotal %>
     <%= f.text_field :circulationtotal, :size=> 75 %><br>
     <%= f.label :circulation %>

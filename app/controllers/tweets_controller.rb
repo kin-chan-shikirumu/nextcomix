@@ -1,6 +1,10 @@
 class TweetsController < ApplicationController
   before_action :authenticate_reader!, except: [:thumb, :show]
-    def thumb
+
+  def home
+    
+  end
+  def thumb
       if params[:search] == nil
         @tweets= Tweet.all
       elsif params[:search] == ''
@@ -88,7 +92,7 @@ class TweetsController < ApplicationController
   private
   
   def tweet_params
-    params.require(:tweet).permit(:title, :about, :body, :serialization, :circulationtotal, :circulation, :circulationtotwothousand, :circulationtotwentyten, :circulationtotwentyfifteen, :circulationtotwentytwenty, :circulationtotwentytwentyfive, :award, :app, tag_ids: [])
+    params.require(:tweet).permit(:title, :image, :about, :body, :author, :serialization, :volume, :circulationtotal, :circulation, :circulationtotwothousand, :circulationtotwentyten, :circulationtotwentyfifteen, :circulationtotwentytwenty, :circulationtotwentytwentyfive, :award, :app, tag_ids: [])
   end
 
   def if_not_admin

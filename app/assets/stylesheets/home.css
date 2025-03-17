@@ -1,19 +1,4 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
- * {
+* {
   padding: 0;
   margin: 0;
 }
@@ -87,16 +72,16 @@ justify-content: flex-end;
 }
 
 .main {
-padding: 10px 10px 30px 5px;
-width: 69%;
-right: 30%;
-background:linear-gradient(to bottom,#ffffff,hsl(23, 100%, 75%));
+  padding: 10px 10px 30px 5px;
+  width: 69%;
+  right: 30%;
+  background:linear-gradient(to bottom,#ffffff,hsl(23, 100%, 75%));
 }
 a{
-color: rgb(127, 25, 0);
+  color: rgb(127, 25, 0);
 }
 a:hover {
-color: orangered;
+  color: orangered;
 }
 
 footer {
@@ -110,4 +95,31 @@ display: flex;
 align-items: center;
 position: fixed;
 justify-content: flex-end;
+}
+
+
+
+
+
+
+
+
+h2 a{
+    margin-left: 1px;
+    color: orange;
+    text-decoration: none;
+}
+.direction {
+    color: rgb(255, 51, 0);
+}
+.introduction-container{
+  display: flex;
+  flex-direction: column;
+  color: rgb(70, 70, 70);
+}
+.comic-image {
+  width: 250px;
+  height: auto;
+  margin: 3px 20px 15px 5px;
+  float: left;
 }

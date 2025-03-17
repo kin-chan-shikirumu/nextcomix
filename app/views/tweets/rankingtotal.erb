@@ -1,11 +1,11 @@
 <div class="main">
 <div class="comic-container">
-<h2>2010～2014年の発行部数ランキング</h2>
+<h2>累計発行部数ランキング</h2>
   <div class="comic-items">
     <ol>
     <% @ranking_tweets.each do |tweet| %>
     <h3><li>
-      <%= link_to tweet.title, tweet_path(tweet) %> - <%= tweet.circulationtotwentyfifteen %> 部
+      <%= link_to tweet.title, tweet_path(tweet) %> - <%= tweet.circulationtotal %>
     </li></h3>
       <div class="comic-image">
         <%= image_tag tweet.image, width: 250 %>
@@ -22,4 +22,4 @@
   </div>
 </div>
 </div>
-<%= stylesheet_link_tag "ranking2015", media: "all" %>
+<%= stylesheet_link_tag "rankingtotal", media: "all" %>

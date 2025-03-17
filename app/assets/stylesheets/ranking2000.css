@@ -46,10 +46,9 @@
   header a:hover{
     color: rgb(140, 37, 0);
   }
-
-.menu {
+  
+  .menu {
   z-index: 0;
-
   display: flex;
   flex-direction: column;
   padding-left: 10px;
@@ -61,8 +60,8 @@
   width: 30%;
   height: 100%;
   left: 70%;
-}
-.catch-copy {
+  }
+  .catch-copy {
   padding-right:0px;
   background:linear-gradient(to right, rgb(255, 252, 214),rgb(254, 106, 0), rgb(255, 89, 0), rgb(255, 51, 0));
   color: rgb(255, 255, 255);
@@ -70,22 +69,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-}
-
-.main {
-  padding: 10px 10px 30px 5px;
-  width: 69%;
-  right: 30%;
-  background:linear-gradient(to bottom,#ffffff,hsl(23, 100%, 75%));
-}
-a{
-  color: rgb(127, 25, 0);
-}
-a:hover {
-  color: orangered;
-}
-
-footer {
+  }
+  
+  .main {
+    padding: 10px 10px 30px 5px;
+    width: 69%;
+    right: 30%;
+    background:linear-gradient(to bottom,#ffffff,hsl(23, 100%, 75%));
+  }
+  a{
+    color: rgb(127, 25, 0);
+  }
+  a:hover {
+    color: orangered;
+  }
+  
+  footer {
   z-index: 1;
   color: white;
   height: 30px;
@@ -96,56 +95,40 @@ footer {
   align-items: center;
   position: fixed;
   justify-content: flex-end;
-}
-
-
-
-
-
-
-
-
-h2 a{
-    margin-left: 1px;
-    color: orange;
-    text-decoration: none;
-}
-
-.main {
-  padding: 10px 10px 240px 5px;
-  height: 100%;
-  width: 69%;
-  right: 30%;
-  background:linear-gradient(to bottom,#ffffff,hsl(23, 100%, 75%));
-}
-.tweets-container {
-  padding-right: 15px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-content: stretch;
-}
-.comic-image {
-  width: 250px;
-  height: auto;
-  margin: 3px 20px 15px 5px;
-  float: left;
-}
-i.fa-solid.fa-thumbs-up::before{
-  color: violet;
-  font-size: 1.2em;
-}
-.fa-solid, .fas {
-  font-weight: 100;
-}
-.fa-thumbs-up {
-  color: violet;
-  --fa: "\f164";
-}
-button {
-  background-color: rgb(251, 210, 251);
-  border: none;
-  color: violet;
-  font-size: 1.2em;
-  cursor: pointer;
-}
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    h3 a{
+        margin-left: 1px;
+        color: orange;
+        text-decoration: none;
+    }
+  
+    h4 {
+      margin: 5px;
+    }
+    
+    a{
+        color: rgb(127, 25, 0);
+    }
+    .comic-image {
+        width: 250px;
+        height: auto;
+        margin: 3px 20px 15px 5px;
+        float: left;
+    }
+  
+  
+  
+  .comic-items {
+    padding-left: 25px;
+    display: flex;
+    flex-direction: column;
+  }

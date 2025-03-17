@@ -49,7 +49,6 @@
 
 .menu {
   z-index: 0;
-
   display: flex;
   flex-direction: column;
   padding-left: 10px;
@@ -96,56 +95,4 @@ footer {
   align-items: center;
   position: fixed;
   justify-content: flex-end;
-}
-
-
-
-
-
-
-
-
-h2 a{
-    margin-left: 1px;
-    color: orange;
-    text-decoration: none;
-}
-
-.main {
-  padding: 10px 10px 240px 5px;
-  height: 100%;
-  width: 69%;
-  right: 30%;
-  background:linear-gradient(to bottom,#ffffff,hsl(23, 100%, 75%));
-}
-.tweets-container {
-  padding-right: 15px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-content: stretch;
-}
-.comic-image {
-  width: 250px;
-  height: auto;
-  margin: 3px 20px 15px 5px;
-  float: left;
-}
-i.fa-solid.fa-thumbs-up::before{
-  color: violet;
-  font-size: 1.2em;
-}
-.fa-solid, .fas {
-  font-weight: 100;
-}
-.fa-thumbs-up {
-  color: violet;
-  --fa: "\f164";
-}
-button {
-  background-color: rgb(251, 210, 251);
-  border: none;
-  color: violet;
-  font-size: 1.2em;
-  cursor: pointer;
 }

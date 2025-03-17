@@ -1,7 +1,25 @@
-<h2>2016～2020年の発行部数ランキング</h2><ol>
-  <% @ranking_tweets.each do |tweet| %>
-    <li>
+<div class="main">
+<div class="comic-container">
+<h2>2015～2019年の発行部数ランキング</h2>
+  <div class="comic-items">
+    <ol>
+    <% @ranking_tweets.each do |tweet| %>
+    <h3><li>
       <%= link_to tweet.title, tweet_path(tweet) %> - <%= tweet.circulationtotwentytwenty %> 部
-    </li>
-  <% end %>
-</ol>
+    </li></h3>
+      <div class="comic-image">
+        <%= image_tag tweet.image, width: 250 %>
+      </div>
+      <h4>ジャンル</h4>
+        <% tweet.tags.each do |tag| %>
+          <ol>＃<span><%= tag.name %></span></ol>
+        <% end %>
+      <h4>あらすじ</h4>
+      <p><%= tweet.about %></p>
+
+    <% end %>
+    </ol>
+  </div>
+</div>
+</div>
+<%= stylesheet_link_tag "ranking2020", media: "all" %>

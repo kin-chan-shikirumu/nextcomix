@@ -3,3 +3,7 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import Raty from "./raty";
 window.Raty = Raty
+//= require jquery
+//= require jquery_ujs
+import jQuery from "jquery";
+window.$ = window.jQuery = jQuery;

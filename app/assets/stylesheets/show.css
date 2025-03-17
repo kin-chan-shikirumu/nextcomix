@@ -11,16 +11,22 @@ body {
   flex-direction: column;
 }
 header {
-  background-color: #00acee;
+  padding: 0px 30px 5px 10px;
+  background:linear-gradient(to bottom,#ea791c,#ea1c1c);
+  width: 68%;
   height: 80px;
+  position: static;
   font-weight: bold;
+  font-family: "Bradley Hand", "Segoe Print", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ",
+    Meiryo, "ＭＳ Ｐゴシック", sans-serif;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 }
 header a {
   color: white; 
-  text-decoration: none; 
+  text-decoration: none;
 }
 header h1 {
   color: white;
@@ -37,6 +43,67 @@ header li {
   list-style: none;
   margin-right: 40px;
 }
+header a:hover{
+  color: rgb(140, 37, 0);
+}
+
+.menu {
+z-index: 0;
+display: flex;
+flex-direction: column;
+padding-left: 10px;
+position: absolute;
+top: 60px;
+right: 30%;
+background: rgb(255, 252, 214);
+top: 0;
+width: 30%;
+height: 100%;
+left: 70%;
+}
+.catch-copy {
+padding-right: 0px;
+background: linear-gradient(to right, rgb(255, 252, 214),rgb(254, 106, 0), rgb(255, 89, 0), rgb(255, 51, 0));
+color: rgb(255, 255, 255);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: flex-end;
+}
+
+.main {
+  padding: 10px 10px 30px 5px;
+  width: 69%;
+  right: 30%;
+  background:linear-gradient(to bottom,#ffffff,hsl(23, 100%, 75%));
+}
+a{
+  color: rgb(127, 25, 0);
+}
+a:hover {
+  color: orangered;
+}
+
+footer {
+z-index: 1;
+color: white;
+height: 30px;
+background-color: #4e0000;
+bottom: 0;
+width: 100%;
+display: flex;
+align-items: center;
+position: fixed;
+justify-content: flex-end;
+}
+
+
+
+
+
+
+
+
 
 .comment-wrapper {
   border-top: solid #00acee ;
@@ -57,19 +124,43 @@ header li {
   display: flex;
   justify-content: flex-end;
 }
+.tweet-image {
+  width: 250px;
+  height: auto;
+  margin: 3px 20px 15px 5px;
+  float: left;
+}
+.genre {
+  color: purple;
+}
 
 
-footer {
-  color: white;
-  height: 30px;
-  background-color: #000;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  position: fixed;
-  justify-content: flex-end;
+
+.volume-number{
+    display: flex;
 }
-a {
-  color: orange;
+.volume-number label{
+    display: block;
+    width: 150px;
+    background: #c8eac3;
+    color: #000;
+    padding: 10px;
+    margin: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 30px;
+    cursor: pointer;
 }
+.volume-number input:checked+label{
+    background: #1a720d;
+    color: #FFF;
+}
+.volume-number input{
+    display: none;
+}
+
+#vote:checked + label .vote-button{
+  fill: #FDBC00;
+}
+
