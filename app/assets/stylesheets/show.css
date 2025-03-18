@@ -164,3 +164,25 @@ justify-content: flex-end;
   fill: #FDBC00;
 }
 
+.vote-button {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  border: 2px solid #4CAF50;
+  border-radius: 5px;
+  background-color: white;
+  color: #4CAF50;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* チェックされたときのスタイル */
+.hidden-checkbox:checked + .vote-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* input[type="checkbox"] を隠す */
+.hidden-checkbox {
+  display: none;
+}
