@@ -83,6 +83,11 @@ class TweetsController < ApplicationController
       circulationtotwentytwentyfive = params[:circulationtotwentytwentyfive]
       @ranking_tweets = Tweet.order(circulationtotwentytwentyfive: :desc).limit(10)
     end
+
+    def rankingtotal
+      circulationtotal = params[:circulationtotal]
+      @ranking_tweets = Tweet.order(circulationtotal: :desc).limit(10)
+    end
     def destroy
       tweet = Tweet.find(params[:id])
       tweet.destroy
