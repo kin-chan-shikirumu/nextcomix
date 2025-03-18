@@ -1,0 +1,28 @@
+{
+  "name": "nightoffire",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.ttf=file",
+    "build:css": "esbuild app/javascript/stylesheets/*.scss --bundle --sourcemap --loader:.scss=css --outdir=app/assets/builds --public-path=/assets",
+    "start": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kin-chan-shikirumu/nightoffire.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kin-chan-shikirumu/nightoffire/issues"
+  },
+  "homepage": "https://github.com/kin-chan-shikirumu/nightoffire#readme",
+  "dependencies": {
+    "esbuild": "^0.25.1"
+  }
+}
