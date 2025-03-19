@@ -1,32 +1,5 @@
 <%= stylesheet_link_tag "home", media: "all" %>
 
-<div class= "menu">
-  <h3>年代別人気漫画ランキング(発行部数)</h3>
-  <%= link_to "～2000年", tweets_ranking2000_path %>
-  <%= link_to "2001年～2010年", tweets_ranking2010_path %>
-  <%= link_to "2011年～2015年", tweets_ranking2015_path %>
-  <%= link_to "2016年～2020年", tweets_ranking2020_path %>
-  <%= link_to "2021年～2025年", tweets_ranking2025_path %>
-  <h3>マンガ検索</h3>
-  ▼作品名から<%= form_tag({controller:"tweets",action:"thumb"}, method: :get) do %>
-    <%= text_field_tag :search %>
-    <%= submit_tag '検索' %>
-  <% end %>
-  ▼ジャンルから絞り込み
-  <%= form_tag({controller:"tweets",action:"thumb"}, method: :get) do %>
-      <% Tag.all.each do |t| %>
-          <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
-      <% end %>
-      <%= submit_tag 'タグ検索' %>
-  <% end %>
-  <% if reader_signed_in? && current_reader.email == ENV['ADMIN_EMAIL'] %> 
-    <%= form_tag({controller:"tweets",action:"thumb"}, method: :get) do %>
-      <%= text_field_tag :tag %>
-      <%= submit_tag 'タグを追加' %>
-    <% end %>
-  <% end %>
-</div>
-
 <div class= "main">
   <h2>とっておきのマンガが見つかる！<br>
   あなただけのマンガ検索サイト<br></h2>
