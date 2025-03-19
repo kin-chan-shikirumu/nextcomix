@@ -1,5 +1,4 @@
 class TweetsController < ApplicationController
-  before_action :authenticate_reader!, except: [:thumb, :show]
 
   def home
     

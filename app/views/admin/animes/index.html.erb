@@ -1,0 +1,23 @@
+<h1>アニメランキング管理</h1>
+<%= link_to '新規アニメ追加', new_admin_anime_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>ランキング</th>
+      <th>編集</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @animes.each do |anime| %>
+      <tr>
+        <td><%= anime.title %></td>
+        <td><%= anime.rank %></td>
+        <td><%= link_to '編集', edit_admin_anime_path(anime) %></td>
+        <td><%= link_to '削除', admin_anime_path(anime), method: :delete, data: { confirm: "削除しますか？" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
